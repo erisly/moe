@@ -1,0 +1,8 @@
+{
+  "plugins": ["react"],
+  "extends": ["pikadude-ts", "next", "plugin:react/recommended"],
+  "rules": {
+      "react/react-in-jsx-scope": "off",
+      "react/jsx-sort-props": "warn"
+  }
+}

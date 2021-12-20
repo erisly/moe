@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.link {
+    @apply font-bold underline;
+}
+.link:hover {
+    @apply bg-erisly-400;
+}
+
+.button {
+    background-color: #FFF;
+    color: #000;
+}
+.button:hover {
+    background-color: #000;
+    color: #FFF;
+}
+
+.hover\:button {
+    @apply duration-200;
+}
+.hover\:button:hover {
+    @apply shadow-xl opacity-95;
+}
+
+.button-github {
+    background-color: #171515;
+    color: #FFF;
+}
+.button-github:hover {
+    background-color: #FFF;
+    color: #171515;
+}
