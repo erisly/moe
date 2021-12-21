@@ -143,16 +143,28 @@ const Index: NextPage = () => {
                 <meta content="@ErislyBot" name="twitter:site" />
             </Head>
             <main className="relative z-10 flex flex-col items-center justify-center flex-1 min-h-screen px-8 text-center">
-                <Image
-                    alt="Erisly"
-                    className="object-contain rounded-md cursor-pointer no-highlight touch-none"
-                    height={256}
-                    onMouseDown={startPet}
-                    onTouchStart={startPet}
-                    quality="100"
-                    src={src}
-                    width={256}
-                />
+                <div onMouseDown={startPet} onTouchStart={startPet}>
+                    <div className={src == IMG_PET ? undefined : 'hidden'}>
+                        <Image
+                            alt="Erisly"
+                            className="object-contain rounded-md cursor-pointer no-highlight touch-none"
+                            height={256}
+                            quality="100"
+                            src={IMG_PET}
+                            width={256}
+                        />
+                    </div>
+                    <div className={src == IMG_UNPET ? undefined : 'hidden'}>
+                        <Image
+                            alt="Erisly"
+                            className="object-contain rounded-md cursor-pointer no-highlight touch-none"
+                            height={256}
+                            quality="100"
+                            src={IMG_UNPET}
+                            width={256}
+                        />
+                    </div>
+                </div>
                 <p className={`pt-4 text-4xl font-bold transition-transform ${src == IMG_PET ? '-translate-y-1' : ''}`}>{pets} pets</p>
                 <audio hidden id="audio" loop src="/click_the_erisly.mp3" />
             </main>
