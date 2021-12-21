@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Going out on a limb and assuming everyone hates this feature */
+img { 
+    -webkit-user-drag: none; 
+    -khtml-user-drag: none; 
+    -moz-user-drag: none; 
+    -o-user-drag: none; 
+    user-drag: none; 
+}
+
 .link {
     @apply font-bold underline;
 }
