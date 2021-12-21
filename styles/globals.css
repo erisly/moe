@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+    @apply text-lg;
+}
+
 /* Going out on a limb and assuming everyone hates this feature */
 img { 
     -webkit-user-drag: none; 
@@ -16,19 +20,19 @@ img {
 }
 
 .link {
-    @apply font-bold underline;
+    @apply underline;
 }
 .link:hover {
-    @apply bg-erisly-400;
+    @apply text-erisly-400;
 }
 
 .button {
-    background-color: #FFF;
-    color: #000;
-}
-.button:hover {
     background-color: #000;
     color: #FFF;
+}
+.button:hover {
+    background-color: #FFF;
+    color: #000;
 }
 
 .hover\:button {

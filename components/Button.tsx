@@ -11,7 +11,7 @@ export default function Button(props: {
     };
     content?: string;
     href?: string;
-    icon?: IconifyIcon;
+    icon?: IconifyIcon | string;
     iconSize?: number;
     noExternal?: boolean;
     subClassName?: string;

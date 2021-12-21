@@ -29,14 +29,17 @@ const Index: NextPage = () => {
                 </div>
                 <h1 className="pt-4 font-bold text-8xl">Erisly.moe</h1>
                 <p className="pt-8">{DESCRIPTION}</p>
-                <Button
-                    className="mt-8 text-xl font-bold"
-                    content="Contribute"
-                    href="https://github.com/erisly/moe.git"
-                    icon={githubIcon}
-                    iconSize={32}
-                    subClassName="button-github"
-                />
+                <div className="flex space-x-4">
+                    <Button
+                        className="mt-8 text-xl font-bold"
+                        content="Contribute"
+                        href="https://github.com/erisly/moe.git"
+                        icon={githubIcon}
+                        iconSize={32}
+                        subClassName="button-github"
+                    />
+                    <Button className="mt-8 text-xl font-bold" content="Site Map" href="/sitemap" icon="fa:sitemap" iconSize={32} noExternal />
+                </div>
             </main>
         </div>
     );
