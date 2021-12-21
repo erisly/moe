@@ -14,7 +14,7 @@ const Page: React.FC<Props> = ({ pages }: InferGetStaticPropsType<typeof getStat
     return (
         <div className="min-h-screen text-white bg-erisly-600">
             <Head>
-                <title>Erisly.moe - Sitemap</title>
+                <title>Erisly.moe - Site Map</title>
                 <meta content={DESCRIPTION} name="description" />
                 <meta content="#FF6394" name="theme-color" />
                 <meta content="website" property="og:type" />
@@ -27,7 +27,7 @@ const Page: React.FC<Props> = ({ pages }: InferGetStaticPropsType<typeof getStat
                 <meta content="@ErislyBot" name="twitter:site" />
             </Head>
             <main className="p-8">
-                <h1 className="text-4xl font-bold">Erisly.moe - Sitemap</h1>
+                <h1 className="text-4xl font-bold">Erisly.moe - Site Map</h1>
                 <ul className="mt-4 list-disc list-inside">{traversePages(pages)}</ul>
                 <Button
                     className="inline-block mt-8 text-xl font-bold"
