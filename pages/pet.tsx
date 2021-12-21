@@ -1,9 +1,9 @@
 import type { NextPage } from 'next';
-import Head from 'next/head';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
-const DESCRIPTION = `do it u wont`;
+import { Head } from '../components';
+
 const IMG_UNPET = '/emotes/unpet.png';
 const IMG_PET = '/emotes/pet.png';
 const EFFECT_WIDTH = 64;
@@ -13,7 +13,7 @@ const emotes = ['flushed', 'heart', 'hug', 'surprised'];
 // snippets of code regarding audio borrowed from Wave.js: https://github.com/foobar404/Wave.js
 // TODO: make the background canvas resize when the window size changes
 
-const Index: NextPage = () => {
+const Page: NextPage = () => {
     // pet counter
     const [pets, setPets] = useState<number>(parseInt((typeof localStorage != 'undefined' ? localStorage.getItem('pets') : '0') || '0'));
     // whether erisly is currently being petted or not. we just match the src at the moment to check
@@ -131,17 +131,8 @@ const Index: NextPage = () => {
 
     return (
         <div className="text-white bg-erisly-600" onMouseUp={endPet}>
-            <Head>
-                <title>Pet the Erisly</title>
-                <meta content={DESCRIPTION} name="description" />
-                <meta content="#FF6394" name="theme-color" />
-                <meta content="website" property="og:type" />
-                <meta content="Pet the Erisly" name="twitter:title" property="og:title" />
-                <meta content={DESCRIPTION} name="twitter:description" property="og:description" />
-                <meta content="https://erisly.moe/_next/image?url=%2Femotes/pet.png&w=256&q=100" name="twitter:image" property="og:image" />
-                <meta content="summary" name="twitter:card" />
-                <meta content="@ErislyBot" name="twitter:site" />
-            </Head>
+            <Head description="do it u wont" image="emotes/pet.png" title="Pet the Erisly" />
+
             <main className="relative z-10 flex flex-col items-center justify-center flex-1 min-h-screen px-8 text-center">
                 <div onMouseDown={startPet} onTouchStart={startPet}>
                     <div className={src == IMG_PET ? undefined : 'hidden'}>
@@ -165,9 +156,11 @@ const Index: NextPage = () => {
                         />
                     </div>
                 </div>
+
                 <p className={`pt-4 text-4xl font-bold transition-transform ${src == IMG_PET ? '-translate-y-1' : ''}`}>{pets} pets</p>
                 <audio hidden id="audio" loop src="/click_the_erisly.mp3" />
             </main>
+
             <div className="absolute top-0 min-h-screen overflow-hidden pointer-events-none min-w-screen" style={{ transform: 'translateZ(0)' }}>
                 <canvas className="opacity-30" id="canvas" style={{ transform: `scale(${musicIntensity})` }} />
             </div>
@@ -175,7 +168,7 @@ const Index: NextPage = () => {
     );
 };
 
-export default Index;
+export default Page;
 
 // all of these were borrowed from Wave.js
 function mirrorData(data: number[]) {

@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Default font size is too small */
 body {
     @apply text-lg;
 }
@@ -15,10 +16,12 @@ img {
     user-drag: none; 
 }
 
+/* Turn off the feature that makes stuff turn blue when tapped on mobile */
 .no-highlight {
     -webkit-tap-highlight-color: transparent;
 }
 
+/* Usually for a (anchor) elements */
 .link {
     @apply underline;
 }

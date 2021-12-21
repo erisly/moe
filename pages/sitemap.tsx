@@ -1,34 +1,23 @@
 import githubIcon from '@iconify/icons-simple-icons/github';
 import { promises as fs } from 'fs';
-import type { GetStaticProps, InferGetStaticPropsType } from 'next';
-import Head from 'next/head';
+import type { GetStaticProps, InferGetStaticPropsType, NextPage } from 'next';
 
-import { Button } from '../components';
+import { Button, Head } from '../components';
 
-const DESCRIPTION = `A list of all available pages on Erisly.moe`;
 interface Props {
     pages: Record<string, unknown>;
 }
 
-const Page: React.FC<Props> = ({ pages }: InferGetStaticPropsType<typeof getStaticProps>) => {
+const Page: NextPage<Props> = ({ pages }: InferGetStaticPropsType<typeof getStaticProps>) => {
     return (
         <div className="min-h-screen text-white bg-erisly-600">
-            <Head>
-                <title>Erisly.moe - Site Map</title>
-                <meta content={DESCRIPTION} name="description" />
-                <meta content="#FF6394" name="theme-color" />
-                <meta content="website" property="og:type" />
-                <meta content="Erisly.moe" name="twitter:title" property="og:title" />
-                <meta content={DESCRIPTION} name="twitter:description" property="og:description" />
-                {/* TODO: Twitter Image
-                    <meta content="https://erisly.moe/_next/image?url=%2Ferisly.png&w=256&q=100" name="twitter:image" property="og:image" />
-                */}
-                <meta content="summary" name="twitter:card" />
-                <meta content="@ErislyBot" name="twitter:site" />
-            </Head>
+            <Head description="A list of all available pages on Erisly.moe" title="Erisly.moe - Site Map" />
+
             <main className="p-8">
                 <h1 className="text-4xl font-bold">Erisly.moe - Site Map</h1>
+
                 <ul className="mt-4 list-disc list-inside">{traversePages(pages)}</ul>
+
                 <Button
                     className="inline-block mt-8 text-xl font-bold"
                     content="Make your own page"

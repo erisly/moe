@@ -10,6 +10,8 @@ Simply fork the repository, make your changes, and submit a pull request! Any in
 
 If you simply have a suggestion for someone else to possibly add, create an issue!
 
+Not sure where to start? Check the rest of this README, existing issues, or the [example webpage](https://erisly.moe/example) for a good starting point on how pages are made.
+
 ## Getting Started
 
 First, run the development server:
