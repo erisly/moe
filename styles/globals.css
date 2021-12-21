@@ -11,6 +11,10 @@ img {
     user-drag: none; 
 }
 
+.no-highlight {
+    -webkit-tap-highlight-color: transparent;
+}
+
 .link {
     @apply font-bold underline;
 }

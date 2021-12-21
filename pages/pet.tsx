@@ -10,15 +10,22 @@ const EFFECT_WIDTH = 64;
 
 const emotes = ['flushed', 'heart', 'hug', 'surprised'];
 
-// snippets of code regarding audio borrowed from https://github.com/foobar404/Wave.js
+// snippets of code regarding audio borrowed from Wave.js: https://github.com/foobar404/Wave.js
+// TODO: make the background canvas resize when the window size changes
 
 const Index: NextPage = () => {
+    // pet counter
     const [pets, setPets] = useState<number>(parseInt((typeof localStorage != 'undefined' ? localStorage.getItem('pets') : '0') || '0'));
+    // whether erisly is currently being petted or not. we just match the src at the moment to check
     const [src, setSrc] = useState<string>(IMG_UNPET);
-    const [siz, setSiz] = useState<number>(1);
+    // tries to align with the bass/bpm of the audio.
+    const [musicIntensity, setMusicIntensity] = useState<number>(1);
+    // the background effects as they scroll by
     const [effects] = useState<{ emote: typeof emotes[number]; x: number; y: number }[]>([]);
 
     function startPet() {
+        if (src == IMG_PET) return;
+
         setPets(pets + 1);
         setSrc(IMG_PET);
         const emote = emotes[random(0, emotes.length - 1)];
@@ -37,7 +44,9 @@ const Index: NextPage = () => {
         return Math.floor(Math.random() * (max - min + 1) + min);
     }
 
+    // all client-side only stuff
     useEffect(() => {
+        // an array of all the cached background effect images
         const emoteImages: HTMLImageElement[] = [];
 
         let maxAmp = 1;
@@ -52,6 +61,7 @@ const Index: NextPage = () => {
             const canvas = document.getElementById('canvas') as HTMLCanvasElement;
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
+            // gonna edit my eslint config to fix this eventually
             // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
             const ctx = canvas.getContext('2d')!;
             window.requestAnimationFrame(() => renderCanvasFrame(ctx));
@@ -87,6 +97,11 @@ const Index: NextPage = () => {
             if (analyser) {
                 analyser.getByteFrequencyData(data);
 
+                // i was struggling to find a way to make the audio sync with the bass
+                // the only working example i could find was with one of Wave.js' visualisers, so i borrowed it
+                // you could likely simplify this down or separate the functions into another file, but for now it's fine
+                // it's not like this is a state-of-the-art website haha
+                // - PikaDude
                 const arr1 = organizeData(data).mids;
                 let arr2 = splitData(arr1, 2)[0];
                 arr2 = shrinkData(arr2, 100);
@@ -96,7 +111,8 @@ const Index: NextPage = () => {
 
                 const amp = arr2[48];
                 if (amp > maxAmp) maxAmp = amp;
-                setSiz(1 + amp / maxAmp / 50);
+                // we scale the amplification down by 50 to make the background less intense, it might make people sick otherwise
+                setMusicIntensity(1 + amp / maxAmp / 50);
             }
 
             window.requestAnimationFrame(() => renderCanvasFrame(ctx));
@@ -114,7 +130,7 @@ const Index: NextPage = () => {
     }, [effects]);
 
     return (
-        <div className="text-white bg-erisly-600">
+        <div className="text-white bg-erisly-600" onMouseUp={endPet}>
             <Head>
                 <title>Pet the Erisly</title>
                 <meta content={DESCRIPTION} name="description" />
@@ -122,19 +138,17 @@ const Index: NextPage = () => {
                 <meta content="website" property="og:type" />
                 <meta content="Pet the Erisly" name="twitter:title" property="og:title" />
                 <meta content={DESCRIPTION} name="twitter:description" property="og:description" />
-                {/* TODO: Twitter Image
-                    <meta content="https://erisly.moe/_next/image?url=%2Ferisly.png&w=256&q=100" name="twitter:image" property="og:image" />
-                */}
+                <meta content="https://erisly.moe/_next/image?url=%2Femotes/pet.png&w=256&q=100" name="twitter:image" property="og:image" />
                 <meta content="summary" name="twitter:card" />
                 <meta content="@ErislyBot" name="twitter:site" />
             </Head>
             <main className="relative z-10 flex flex-col items-center justify-center flex-1 min-h-screen px-8 text-center">
                 <Image
                     alt="Erisly"
-                    className="object-contain rounded-md cursor-pointer"
+                    className="object-contain rounded-md cursor-pointer no-highlight touch-none"
                     height={256}
                     onMouseDown={startPet}
-                    onMouseUp={endPet}
+                    onTouchStart={startPet}
                     quality="100"
                     src={src}
                     width={256}
@@ -143,7 +157,7 @@ const Index: NextPage = () => {
                 <audio hidden id="audio" loop src="/click_the_erisly.mp3" />
             </main>
             <div className="absolute top-0 min-h-screen overflow-hidden pointer-events-none min-w-screen" style={{ transform: 'translateZ(0)' }}>
-                <canvas className="opacity-30" id="canvas" style={{ transform: `scale(${siz})` }} />
+                <canvas className="opacity-30" id="canvas" style={{ transform: `scale(${musicIntensity})` }} />
             </div>
         </div>
     );
@@ -151,6 +165,7 @@ const Index: NextPage = () => {
 
 export default Index;
 
+// all of these were borrowed from Wave.js
 function mirrorData(data: number[]) {
     let rtn = [];
 
