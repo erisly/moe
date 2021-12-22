@@ -1,6 +1,6 @@
 ---
 name: Feature request
-about: Suggest an idea for this project
+about: Suggest an idea or feature for Erisly.moe
 title: ''
 labels: enhancement
 assignees: ''
