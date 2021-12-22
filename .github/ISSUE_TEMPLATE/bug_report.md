@@ -26,11 +26,11 @@ A clear and concise description of what actually happens instead.
 **Screenshots**
 If applicable, add screenshots to help explain your problem.
 
-**Environment:**
+**Environment**
 Please describe what browser and device you're using:
  - Device: [e.g. Smartphone, PC, etc]
  - OS: [e.g. Windows 10, iOS 12, Linux, etc]
- - Browser [e.g. Chrome, Safari, Firefox, etc]
+ - Browser: [e.g. Chrome, Safari, Firefox, etc]
 
 **Additional information**
 Add any other information about the problem here.
