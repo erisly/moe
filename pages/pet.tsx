@@ -33,7 +33,10 @@ const Page: NextPage = () => {
         localStorage.setItem('pets', (pets + 1).toString());
 
         const audio = document.getElementById('audio') as HTMLAudioElement;
-        if (audio.paused) audio.play();
+        if (audio.paused) {
+            audio.volume = 0.5;
+            audio.play();
+        }
     }
 
     function endPet() {
@@ -111,8 +114,8 @@ const Page: NextPage = () => {
 
                 const amp = arr2[48];
                 if (amp > maxAmp) maxAmp = amp;
-                // we scale the amplification down by 50 to make the background less intense, it might make people sick otherwise
-                setMusicIntensity(1 + amp / maxAmp / 50);
+                // we scale the amplification down to make the background less intense, it might make people sick otherwise
+                setMusicIntensity(1 + amp / maxAmp / ((window.innerWidth * window.innerHeight) / 50000));
             }
 
             window.requestAnimationFrame(() => renderCanvasFrame(ctx));
