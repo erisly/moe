@@ -1,5 +1,6 @@
 import githubIcon from '@iconify/icons-simple-icons/github';
 import type { NextPage } from 'next';
+import erisly from "../public/erisly.png";
 import Image from 'next/image';
 
 import { Button, Constants, Head } from '../components';
@@ -10,10 +11,10 @@ const Page: NextPage = () => {
             <Head />
 
             <main className="flex flex-col items-center justify-center flex-1 min-h-screen px-8 text-center">
-                <div className="sm:mx-24 leading-0">
-                    <Image alt="Erisly" className="object-contain rounded-md" height={530} quality="100" src="/erisly.png" width={500} />
+                <div className="sm:mx-24 leading-0 object-fit relative h-72 w-72 sm:h-96 sm:w-96 md:h-[530px] md:w-[500px]">
+                    <Image alt="Erisly" className="rounded-md" quality="100" src={erisly} layout="fill" />
                 </div>
-                <h1 className="pt-4 font-bold text-8xl">Erisly.moe</h1>
+                <h1 className="pt-4 font-bold text-3xl sm:text-5xl md:text-8xl">Erisly.moe</h1>
                 <p className="pt-8">{Constants.DESCRIPTION}</p>
 
                 <div className="flex space-x-4">
