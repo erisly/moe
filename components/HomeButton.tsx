@@ -1,3 +1,4 @@
+import homeIcon from '@iconify/icons-mdi/home';
 import React, { ReactElement } from 'react';
 
 import { Button } from '.';
@@ -9,7 +10,7 @@ export default function HomeButton(): ReactElement {
             content="Home"
             hoverToShowContent
             href="/"
-            icon="fa:home"
+            icon={homeIcon}
             iconSize={32}
             noExternal
         />

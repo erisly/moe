@@ -1,3 +1,4 @@
+import sitemapIcon from '@iconify/icons-mdi/sitemap';
 import githubIcon from '@iconify/icons-simple-icons/github';
 import type { NextPage } from 'next';
 import Image from 'next/image';
@@ -26,7 +27,7 @@ const Page: NextPage = () => {
                         iconSize={32}
                         subClassName="button-github"
                     />
-                    <Button className="text-xl font-bold" content="Site Map" href="/sitemap" icon="fa:sitemap" iconSize={32} noExternal />
+                    <Button className="text-xl font-bold" content="Site Map" href="/sitemap" icon={sitemapIcon} iconSize={32} noExternal />
                 </div>
             </main>
         </div>
