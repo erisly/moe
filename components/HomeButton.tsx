@@ -5,7 +5,7 @@ import { Button } from '.';
 export default function HomeButton(): ReactElement {
     return (
         <Button
-            className="absolute bottom-0 left-0 z-50 m-4 md:m-8"
+            className="fixed bottom-0 left-0 z-50 m-4 md:m-8"
             content="Home"
             hoverToShowContent
             href="/"
