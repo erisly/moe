@@ -54,8 +54,8 @@ const Page: NextPage<Props> = ({ complete }: InferGetServerSidePropsType<typeof 
     return (
         <div className="text-white bg-erisly-600">
             <Head
-                description="Verify your identity on Discord and GitHub to receive the erisly.moe Contributor role in Erisly's Official Discord Server"
-                title="Verify Your Contributions"
+                description="Verify your identity on Discord and GitHub to receive the erisly.moe Contributor role in Erisly's Official Discord Server if you're a code contributor to the site."
+                title="Verify Your Code Contributions"
             />
 
             <main className="flex flex-wrap items-center justify-center min-h-screen gap-4 p-16 lg:flex-nowrap">
@@ -157,7 +157,7 @@ const Information = () => (
             <h1 className="text-4xl font-bold">Verify your Discord and GitHub accounts for your contributions!</h1>
 
             <p className="pt-8">
-                Sign in with your Discord account to allow erisly.moe to associate your Discord account with your GitHub account and verify your
+                Sign in with your Discord account to allow erisly.moe to associate your Discord account with your GitHub account and verify your code
                 contributions!
             </p>
             <p>
@@ -166,15 +166,16 @@ const Information = () => (
             <br />
             <p>
                 <strong>
-                    However, you must first be in <ErislyDiscordLink /> before signing in with Discord below, and you must already be a contributor
-                    for erisly.moe, likely via having a Pull Request of yours successfully merged on the GitHub repository for the website.
+                    However, you must first be in <ErislyDiscordLink /> before signing in with Discord below, and you must already be a code
+                    contributor for erisly.moe, likely via having a Pull Request of yours successfully merged on the GitHub repository for the
+                    website.
                 </strong>
             </p>
             <br />
             <p>
                 Once you click the button below, you'll be navigated to sign in with your Discord account, requesting access to your username and
                 Discord profile in order to identify yourself, and your Discord account's connections in order to determine your GitHub username and
-                therefore your contributions.{' '}
+                therefore your code contributions.{' '}
                 <strong>Be sure to have your correct GitHub account connected to your Discord account before continuing.</strong>
             </p>
             <div className="flex flex-wrap items-center justify-center gap-4 mt-8">
