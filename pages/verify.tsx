@@ -54,8 +54,8 @@ const Page: NextPage<Props> = ({ complete }: InferGetServerSidePropsType<typeof 
     return (
         <div className="text-white bg-erisly-600">
             <Head
-                description="Verify your identity on Discord and GitHub to receive your Erisly.moe Contributor in Erisly's Official Discord Server"
-                title="Verify"
+                description="Verify your identity on Discord and GitHub to receive the Erisly.moe Contributor role in Erisly's Official Discord Server"
+                title="Verify Your Contributions"
             />
 
             <main className="flex flex-wrap items-center justify-center min-h-screen gap-4 p-16 lg:flex-nowrap">
