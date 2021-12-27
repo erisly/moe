@@ -1,3 +1,5 @@
+const colors = require('tailwindcss/colors');
+
 const config = {
     content: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
     theme: {
@@ -16,6 +18,11 @@ const config = {
                 900: '#1C1B29',
             },
             white: '#ffffff',
+            black: '#000000',
+            discord: '#5865F2',
+            github: '#171515',
+            green: colors.green,
+            red: colors.red,
         },
     },
     plugins: [],

@@ -30,12 +30,10 @@ img {
 }
 
 .button {
-    background-color: #000;
-    color: #FFF;
+    @apply text-white bg-black;
 }
 .button:hover {
-    background-color: #FFF;
-    color: #000;
+    @apply text-black bg-white;
 }
 
 .hover\:button {
@@ -46,10 +44,22 @@ img {
 }
 
 .button-github {
-    background-color: #171515;
-    color: #FFF;
+    @apply text-white bg-github;
 }
 .button-github:hover {
-    background-color: #FFF;
-    color: #171515;
+    @apply bg-white text-github;
+}
+
+.button-discord {
+    @apply text-white bg-discord;
+}
+.button-discord:hover {
+    @apply bg-white text-discord;
+}
+
+.button-discord-github {
+    @apply text-white bg-gradient-to-r from-discord to-github;
+}
+.button-discord-github:hover {
+    @apply text-white;
 }

@@ -12,8 +12,9 @@ export default function Button(props: {
     content?: string;
     hoverToShowContent?: boolean;
     href?: string;
-    icon?: IconifyIcon | string;
+    icon?: IconifyIcon;
     iconSize?: number;
+    icons?: IconifyIcon[];
     noExternal?: boolean;
     subClassName?: string;
 }): ReactElement {
@@ -25,13 +26,16 @@ export default function Button(props: {
     const contentClassName = props.hoverToShowContent ? 'max-w-0 transition-slide group-hover:max-w-sm group-hover:ml-3' : undefined;
     const contentStyle = props.hoverToShowContent ? { clipPath: 'polygon(0% 0, 100% 0, 100% 100%, 0 100%)', color: 'black' } : undefined;
 
+    const icons = props.icons || (props.icon ? [props.icon as IconifyIcon] : []);
+
     return (
         <Link button className={linkClassName} href={props.href} noExternal={props.noExternal}>
             <div className={containerClassName} style={containerStyle}>
-                {props.icon ? <InlineIcon height={props.iconSize || 16} icon={props.icon} width={props.iconSize || 16} /> : null}
+                {icons[0] ? <InlineIcon height={props.iconSize || 16} icon={icons[0]} width={props.iconSize || 16} /> : null}
                 <span className={contentClassName} style={contentStyle}>
                     {props.content}
                 </span>
+                {icons[1] ? <InlineIcon height={props.iconSize || 16} icon={icons[1]} width={props.iconSize || 16} /> : null}
             </div>
         </Link>
     );

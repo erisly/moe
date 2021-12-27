@@ -16,7 +16,7 @@ const Page: NextPage = () => {
                     <Image alt="Erisly" className="rounded-md" layout="fill" quality="100" src={erisly} />
                 </div>
                 <h1 className="pt-4 text-3xl font-bold sm:text-5xl md:text-8xl">Erisly.moe</h1>
-                <p className="pt-8">{Constants.DESCRIPTION}</p>
+                <p className="pt-8">{Constants.SITE.DESCRIPTION}</p>
 
                 <div className="flex flex-wrap items-center justify-center gap-4 mt-8">
                     <Button

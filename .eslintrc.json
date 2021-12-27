@@ -3,6 +3,7 @@
   "extends": ["pikadude-ts", "next", "plugin:react/recommended"],
   "rules": {
       "react/react-in-jsx-scope": "off",
-      "react/jsx-sort-props": "warn"
+      "react/jsx-sort-props": "warn",
+      "react/no-unescaped-entities": "off"
   }
 }
