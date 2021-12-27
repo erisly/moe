@@ -2,7 +2,7 @@ import githubIcon from '@iconify/icons-simple-icons/github';
 import { promises as fs } from 'fs';
 import type { GetStaticProps, InferGetStaticPropsType, NextPage } from 'next';
 
-import { Button, Head } from '../components';
+import { Button, Head, Link } from '../components';
 
 interface Props {
     pages: Record<string, unknown>;
@@ -79,18 +79,18 @@ function traversePages(pages: Record<string, unknown>, path = [] as string[]): R
 
             result.push(
                 <li key={levelName}>
-                    <a className={`font-bold ${hasIndex ? 'link' : ''}`} href={hasIndex ? formattedPath : undefined}>
-                        {levelName}
-                    </a>
+                    {hasIndex ? (
+                        <Link className="font-bold" content={levelName} href={formattedPath} />
+                    ) : (
+                        <span className="font-bold">{levelName}</span>
+                    )}
                     <ul className="pl-8 list-disc list-inside">{traversePages(level as Record<string, unknown>, [...path, levelName])}</ul>
                 </li>
             );
         } else if (levelName != 'index') {
             result.push(
                 <li key={levelName}>
-                    <a className="link" href={formattedPath}>
-                        {levelName}
-                    </a>
+                    <Link content={levelName} href={formattedPath} />
                 </li>
             );
         }
