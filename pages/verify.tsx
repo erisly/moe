@@ -134,16 +134,16 @@ const Results = ({ data }: { data: Data }) => (
         ) : (
             <></>
         )}
-        {!data.contributor ? (
+        {!data.inServer ? (
             <p className="text-2xl font-bold">
-                You need to actually contribute to <ErislyGitHubLink /> before you can get yourself the contributor role!
+                You need to actually be in <ErislyDiscordLink /> before you can get yourself the contributor role!
             </p>
         ) : (
             <></>
         )}
-        {!data.inServer ? (
+        {!data.contributor ? (
             <p className="text-2xl font-bold">
-                You need to actually be in <ErislyDiscordLink /> before you can get yourself the contributor role!
+                You need to actually contribute to <ErislyGitHubLink /> before you can get yourself the contributor role!
             </p>
         ) : (
             <></>
