@@ -43,6 +43,13 @@ img {
     @apply shadow-xl opacity-95;
 }
 
+.button-erisly {
+    @apply text-white bg-erisly-400;
+}
+.button-erisly:hover {
+    @apply bg-white text-erisly-400;
+}
+
 .button-github {
     @apply text-white bg-github;
 }

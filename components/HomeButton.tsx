@@ -8,11 +8,13 @@ export default function HomeButton(): ReactElement {
         <Button
             className="fixed bottom-0 left-0 z-50 m-4 md:m-8"
             content="Home"
+            contentClassName="erisly-400"
             hoverToShowContent
             href="/"
             icon={homeIcon}
             iconSize={32}
             noExternal
+            subClassName="button-erisly"
         />
     );
 }

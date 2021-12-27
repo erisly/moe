@@ -10,6 +10,7 @@ export default function Button(props: {
         fg?: string;
     };
     content?: string;
+    contentClassName?: string;
     hoverToShowContent?: boolean;
     href?: string;
     icon?: IconifyIcon;
@@ -23,8 +24,10 @@ export default function Button(props: {
         props.subClassName
     }`;
     const containerStyle = { backgroundColor: props.colour?.bg, color: props.colour?.fg };
-    const contentClassName = props.hoverToShowContent ? 'max-w-0 transition-slide group-hover:max-w-sm group-hover:ml-3' : undefined;
-    const contentStyle = props.hoverToShowContent ? { clipPath: 'polygon(0% 0, 100% 0, 100% 100%, 0 100%)', color: 'black' } : undefined;
+    const contentClassName = props.hoverToShowContent
+        ? `max-w-0 transition-slide group-hover:max-w-sm group-hover:ml-3 ${props.contentClassName}`
+        : props.contentClassName;
+    const contentStyle = props.hoverToShowContent ? { clipPath: 'polygon(0% 0, 100% 0, 100% 100%, 0 100%)' } : undefined;
 
     const icons = props.icons || (props.icon ? [props.icon as IconifyIcon] : []);
 
