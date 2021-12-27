@@ -3,7 +3,13 @@ import React, { ReactElement } from 'react';
 
 import { Constants, HomeButton } from '.';
 
-export default function Head(props: { color?: string; description?: string; image?: string; title?: string }): ReactElement {
+export default function Head(props: {
+    color?: string;
+    description?: string;
+    image?: string;
+    showHomeButton?: boolean;
+    title?: string;
+}): ReactElement {
     return (
         <>
             <NextJSHead>
@@ -18,7 +24,7 @@ export default function Head(props: { color?: string; description?: string; imag
                 <meta content="@ErislyBot" name="twitter:site" />
             </NextJSHead>
 
-            <HomeButton />
+            {props.showHomeButton != false ? <HomeButton /> : undefined}
         </>
     );
 }
