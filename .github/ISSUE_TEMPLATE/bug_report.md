@@ -1,6 +1,6 @@
 ---
 name: Bug report
-about: Report an issue or bug with Erisly.moe
+about: Report an issue or bug with erisly.moe
 title: ''
 labels: bug
 assignees: ''

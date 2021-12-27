@@ -1,7 +1,7 @@
-# Erisly.moe
-Erisly.moe is (potentially) the best website on the Internet... with the power to make it so in your hands.
+# erisly.moe
+erisly.moe is (potentially) the best website on the Internet... with the power to make it so in your hands.
 
-Erisly.moe is a website about Erisly. What exactly about Erisly is up to you. The repository is public and anyone can submit possible changes or additions through pull requests.
+erisly.moe is a website about Erisly. What exactly about Erisly is up to you. The repository is public and anyone can submit possible changes or additions through pull requests.
 
 The website can be accessed at, you guessed it, [erisly.moe](https://erisly.moe).
 

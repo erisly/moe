@@ -11,10 +11,10 @@ interface Props {
 const Page: NextPage<Props> = ({ pages }: InferGetStaticPropsType<typeof getStaticProps>) => {
     return (
         <div className="min-h-screen text-white bg-erisly-600">
-            <Head description="A list of all available pages on Erisly.moe" title="Erisly.moe - Site Map" />
+            <Head description="A list of all available pages on erisly.moe" title="erisly.moe - Site Map" />
 
             <main className="p-8">
-                <h1 className="text-4xl font-bold">Erisly.moe - Site Map</h1>
+                <h1 className="text-4xl font-bold">erisly.moe - Site Map</h1>
 
                 <ul className="mt-4 list-disc list-inside">{traversePages(pages)}</ul>
 

@@ -24,9 +24,9 @@ export const GITHUB = {
 
 export const SITE = {
     COLOR: '#FF6394',
-    DESCRIPTION: 'Erisly.moe is (potentially) the best website on the Internet... with the power to make it so in your hands.',
+    DESCRIPTION: 'erisly.moe is (potentially) the best website on the Internet... with the power to make it so in your hands.',
     IMAGE: 'erisly.png',
-    TITLE: 'Erisly.moe',
+    TITLE: 'erisly.moe',
 };
 
 DISCORD.OAUTH.LINK = `https://discord.com/oauth2/authorize?client_id=${DISCORD.CLIENT_ID}&redirect_uri=${encodeURIComponent(

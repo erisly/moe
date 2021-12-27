@@ -22,7 +22,7 @@ const Page: NextPage = () => {
                 This is imported earlier from the components on line 9. (This is important)
                 This contains special metadata information that tells the Browser and other sites (like Discord) what the page is about.
             */}
-            <Head description="This is an example Erisly.moe page" title="Example Page" />
+            <Head description="This is an example erisly.moe page" title="Example Page" />
 
             {/*
                 This is a "main" element, where the main content of the page will be.
@@ -33,7 +33,7 @@ const Page: NextPage = () => {
                     We write some text using "p" (paragraph) elements.
                     The first line has a class to make it bigger.
                 */}
-                <p className="text-2xl">This is an example page for Erisly.moe</p>
+                <p className="text-2xl">This is an example page for erisly.moe</p>
                 <p>Check out the source code to see how this simple page works!</p>
 
                 {/*

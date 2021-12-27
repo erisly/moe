@@ -63,7 +63,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
             {
                 headers: {
                     Authorization: `Bot ${Constants.DISCORD.BOT_TOKEN}`,
-                    'X-Audit-Log-Reason': 'Erisly.moe Contributor. GitHub: ' + githubInfo.login,
+                    'X-Audit-Log-Reason': 'erisly.moe Contributor. GitHub: ' + githubInfo.login,
                 },
                 method: 'PUT',
             }

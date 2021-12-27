@@ -54,7 +54,7 @@ const Page: NextPage<Props> = ({ complete }: InferGetServerSidePropsType<typeof 
     return (
         <div className="text-white bg-erisly-600">
             <Head
-                description="Verify your identity on Discord and GitHub to receive the Erisly.moe Contributor role in Erisly's Official Discord Server"
+                description="Verify your identity on Discord and GitHub to receive the erisly.moe Contributor role in Erisly's Official Discord Server"
                 title="Verify Your Contributions"
             />
 
@@ -72,7 +72,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async ({ query }) =
 
 const ErislyDiscordLink = () => <Link content="Erisly's Official Discord Server" href="https://discord.gg/erisly" />;
 
-const ErislyGitHubLink = () => <Link content="Erisly.moe" href="https://github.com/erisly/moe" />;
+const ErislyGitHubLink = () => <Link content="erisly.moe" href="https://github.com/erisly/moe" />;
 
 const Verifying = () => (
     <>
@@ -126,7 +126,7 @@ const Results = ({ data }: { data: Data }) => (
         </div>
         {data.contributor && data.inServer ? (
             <>
-                <p className="mb-4 text-4xl font-bold">Congratulations! You've been given the Erisly.moe Contributor role!</p>
+                <p className="mb-4 text-4xl font-bold">Congratulations! You've been given the erisly.moe Contributor role!</p>
                 <p>
                     Thank you for your contributions! <InlineIcon className="inline text-red-400" icon={heartIcon} />
                 </p>
@@ -157,17 +157,17 @@ const Information = () => (
             <h1 className="text-4xl font-bold">Verify your Discord and GitHub accounts for your contributions!</h1>
 
             <p className="pt-8">
-                Sign in with your Discord account to allow Erisly.moe to associate your Discord account with your GitHub account and verify your
+                Sign in with your Discord account to allow erisly.moe to associate your Discord account with your GitHub account and verify your
                 contributions!
             </p>
             <p>
-                By doing this, you'll receive the "Erisly.moe Contributor" role on <ErislyDiscordLink />.
+                By doing this, you'll receive the "erisly.moe Contributor" role on <ErislyDiscordLink />.
             </p>
             <br />
             <p>
                 <strong>
                     However, you must first be in <ErislyDiscordLink /> before signing in with Discord below, and you must already be a contributor
-                    for Erisly.moe, likely via having a Pull Request of yours successfully merged on the GitHub repository for the website.
+                    for erisly.moe, likely via having a Pull Request of yours successfully merged on the GitHub repository for the website.
                 </strong>
             </p>
             <br />
