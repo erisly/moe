@@ -21,7 +21,7 @@ export default function Button(props: {
 }): ReactElement {
     const linkClassName = `group ${props.className}`;
     const containerClassName = `flex items-center p-3 ${props.hoverToShowContent ? '' : 'space-x-3'} no-underline hover:button button rounded-3xl ${
-        props.subClassName
+        props.subClassName || ''
     }`;
     const containerStyle = { backgroundColor: props.colour?.bg, color: props.colour?.fg };
     const contentClassName = props.hoverToShowContent
