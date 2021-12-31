@@ -4,8 +4,8 @@ import { useEffect, useState } from 'react';
 
 import { Head } from '../components';
 
-const IMG_UNPET = '/emotes/unpet.png';
-const IMG_PET = '/emotes/pet.png';
+const IMG_UNPET = '/erisly/emotes/unpet.png';
+const IMG_PET = '/erisly/emotes/pet.png';
 const EFFECT_WIDTH = 64;
 
 const emotes = ['flushed', 'heart', 'hug', 'surprised'];
@@ -59,7 +59,7 @@ const Page: NextPage = () => {
 
         async function init() {
             emotes.forEach(async (emote, i) => {
-                emoteImages[i] = await loadImage(`/_next/image?url=/emotes/${emote}.png&w=${EFFECT_WIDTH}&q=100`);
+                emoteImages[i] = await loadImage(`/_next/image?url=/erisly/emotes/${emote}.png&w=${EFFECT_WIDTH}&q=100`);
             });
             const canvas = document.getElementById('canvas') as HTMLCanvasElement;
             canvas.width = window.innerWidth;
@@ -134,7 +134,7 @@ const Page: NextPage = () => {
 
     return (
         <div className="text-white bg-erisly-600" onMouseUp={endPet}>
-            <Head description="do it u wont" image="emotes/pet.png" title="Pet the Erisly" />
+            <Head description="do it u wont" image="erisly/emotes/pet.png" title="Pet the Erisly" />
 
             <main className="relative z-10 flex flex-col items-center justify-center flex-1 min-h-screen px-8 text-center">
                 <div onMouseDown={startPet} onTouchStart={startPet}>

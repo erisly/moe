@@ -4,7 +4,7 @@ import type { NextPage } from 'next';
 import Image from 'next/image';
 
 import { Button, Constants, Head } from '../components';
-import erisly from '../public/erisly.png';
+import erisly from '../public/erisly/main.png';
 
 const Page: NextPage = () => {
     return (

@@ -11,7 +11,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 import { Button, Constants, Head, Link, Loading } from '../components';
-import erisly from '../public/emotes/hug.png';
+import erisly from '../public/erisly/emotes/hug.png';
 
 interface AccountData {
     avatar: string;

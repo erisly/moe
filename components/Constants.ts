@@ -25,7 +25,7 @@ export const GITHUB = {
 export const SITE = {
     COLOR: '#FF6394',
     DESCRIPTION: 'erisly.moe is (potentially) the best website on the Internet... with the power to make it so in your hands.',
-    IMAGE: 'erisly.png',
+    IMAGE: 'erisly/main.png',
     TITLE: 'erisly.moe',
 };
 
