@@ -6,8 +6,10 @@ const Link = (props: {
     children?: ReactElement | ReactElement[];
     className?: string;
     content?: string;
+    disabled?: boolean;
     href?: string;
     noExternal?: boolean;
+    onClick?: () => void;
 }): ReactElement =>
     props.href?.startsWith('/') ? (
         <NextLink href={props.href}>
@@ -15,8 +17,9 @@ const Link = (props: {
         </NextLink>
     ) : (
         <a
-            className={`cursor-pointer ${props.button ? '' : 'link'} ${props.className || ''}`}
+            className={`cursor-pointer ${props.button ? '' : 'link'} ${props.className || ''} ${props.disabled == true ? 'disabled' : ''}`}
             href={props.href}
+            onClick={props.onClick}
             rel="noreferrer"
             target={props.noExternal ? undefined : '_blank'}
         >

@@ -43,6 +43,12 @@ img {
     @apply shadow-xl opacity-95;
 }
 
+.disabled {
+    pointer-events: none;
+    cursor: default;
+    opacity: 0.8;
+}
+
 .button-erisly {
     @apply text-white bg-erisly-400;
 }

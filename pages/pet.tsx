@@ -1,36 +1,85 @@
+// man who refuses to learn react or next.js attempts to make game
+// if this works i will be amazed
+
 import type { NextPage } from 'next';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
-import { Head } from '../components';
+import { Button, Head, Marquee } from '../components';
 
+const SAVE_ID = 'pets-save';
 const IMG_UNPET = '/erisly/emotes/unpet.png';
 const IMG_PET = '/erisly/emotes/pet.png';
 const EFFECT_WIDTH = 64;
 
 const emotes = ['flushed', 'heart', 'hug', 'surprised'];
+const lines: {
+    line: string;
+    requirements: {
+        employees?: number;
+    };
+}[] = [
+    {
+        line: `BREAKING NEWS: A local man has begun to hire various people to pet a woman on her head. Employees say that they are not being paid in "material things" like money, they are being paid with the privilege to pet the mysterious woman.`,
+        requirements: {
+            employees: 5,
+        },
+    },
+];
+const upgrades: Upgrade[] = [
+    {
+        cost: 20,
+        interval: 5,
+        name: 'Employee',
+        pets: 1,
+    },
+];
+const maxUpgradeInterval = 5;
+
+let initialized = false;
+const marqueeQueue: string[] = [];
+
+interface SaveData {
+    pets: number;
+    purchasedUpgrades: number[];
+    totalPets: number;
+    version: 1;
+}
+
+interface Upgrade {
+    cost: number;
+    interval: number;
+    name: string;
+    pets: number;
+}
 
 // snippets of code regarding audio borrowed from Wave.js: https://github.com/foobar404/Wave.js
 // TODO: make the background canvas resize when the window size changes
 
 const Page: NextPage = () => {
     // pet counter
-    const [pets, setPets] = useState<number>(parseInt((typeof localStorage != 'undefined' ? localStorage.getItem('pets') : '0') || '0'));
+    const [save, setSave] = useState<SaveData>({
+        pets: 0,
+        // eslint-disable-next-line @typescript-eslint/no-array-constructor
+        purchasedUpgrades: new Array(upgrades.length).fill(0),
+        totalPets: 0,
+        version: 1,
+    });
     // whether erisly is currently being petted or not. we just match the src at the moment to check
-    const [src, setSrc] = useState<string>(IMG_UNPET);
+    const [src, setSrc] = useState(IMG_UNPET);
     // tries to align with the bass/bpm of the audio.
-    const [musicIntensity, setMusicIntensity] = useState<number>(1);
+    const [musicIntensity, setMusicIntensity] = useState(1);
     // the background effects as they scroll by
     const [effects] = useState<{ emote: typeof emotes[number]; x: number; y: number }[]>([]);
+    const [upgradesOpen, setUpgradesOpen] = useState(false);
 
     function startPet() {
         if (src == IMG_PET) return;
 
-        setPets(pets + 1);
+        setSave((save) => ({ ...save, pets: save.pets + 1, totalPets: save.totalPets + 1 }));
         setSrc(IMG_PET);
         const emote = emotes[random(0, emotes.length - 1)];
         effects.push({ emote, x: -1, y: 0 });
-        localStorage.setItem('pets', (pets + 1).toString());
 
         const audio = document.getElementById('audio') as HTMLAudioElement;
         if (audio.paused) {
@@ -43,12 +92,33 @@ const Page: NextPage = () => {
         setSrc(IMG_UNPET);
     }
 
+    function buyUpgrade(i: number) {
+        if (upgrades[i].cost > save.pets) return;
+        setSave((save) => ({
+            ...save,
+            pets: save.pets - upgrades[i].cost,
+            purchasedUpgrades: save.purchasedUpgrades.fill(save.purchasedUpgrades[i] + 1, i, i + 1),
+        }));
+
+        lines.forEach((line) => {
+            if ((line.requirements.employees || 0) == save.purchasedUpgrades[0]) {
+                lines.splice(0, 1);
+                marqueeQueue.push(line.line);
+            }
+        });
+    }
+
     function random(min: number, max: number) {
         return Math.floor(Math.random() * (max - min + 1) + min);
     }
 
     // all client-side only stuff
     useEffect(() => {
+        if (initialized) return;
+        initialized = true;
+
+        if (typeof localStorage != 'undefined' && localStorage.getItem(SAVE_ID) != null) setSave(JSON.parse(localStorage.getItem(SAVE_ID) as string));
+
         // an array of all the cached background effect images
         const emoteImages: HTMLImageElement[] = [];
 
@@ -85,6 +155,8 @@ const Page: NextPage = () => {
                 const bufferLength = analyser.frequencyBinCount;
                 data = new Uint8Array(bufferLength);
             };
+
+            setInterval(intervalRunner, 1000);
         }
 
         function renderCanvasFrame(ctx: CanvasRenderingContext2D) {
@@ -129,6 +201,26 @@ const Page: NextPage = () => {
             });
         }
 
+        let interval = 1;
+        function intervalRunner() {
+            setSave((save) => {
+                let newPets = 0;
+                upgrades.forEach((upgrade, i) => {
+                    const purchased = save.purchasedUpgrades[i];
+                    if (purchased == 0) return;
+                    let pets = upgrade.pets * Math.floor(purchased / upgrade.interval);
+                    if (interval % upgrade.interval == 0) pets += purchased % upgrade.interval;
+                    newPets += pets;
+                });
+
+                localStorage.setItem(SAVE_ID, JSON.stringify(save));
+                return { ...save, pets: save.pets + newPets, totalPets: save.totalPets + newPets };
+            });
+
+            interval++;
+            if (interval > maxUpgradeInterval) interval = 1;
+        }
+
         init();
     }, [effects]);
 
@@ -137,6 +229,15 @@ const Page: NextPage = () => {
             <Head description="do it u wont" image="erisly/emotes/pet.png" title="Pet the Erisly" />
 
             <main className="relative z-10 flex flex-col items-center justify-center flex-1 min-h-screen px-8 text-center">
+                {marqueeQueue.length > 0 ? (
+                    <Marquee
+                        className="fixed top-0 min-w-full py-4 overflow-hidden text-xl bg-black bg-opacity-40"
+                        content={marqueeQueue[0]}
+                        onComplete={() => marqueeQueue.splice(0, 1)}
+                    />
+                ) : (
+                    <></>
+                )}
                 <div onMouseDown={startPet} onTouchStart={startPet}>
                     <div className={src == IMG_PET ? undefined : 'hidden'}>
                         <Image
@@ -160,11 +261,35 @@ const Page: NextPage = () => {
                     </div>
                 </div>
 
-                <p className={`pt-4 text-4xl font-bold transition-transform ${src == IMG_PET ? '-translate-y-1' : ''}`}>{pets} pets</p>
+                <p className={`pt-4 text-4xl font-bold transition-transform ${src == IMG_PET ? '-translate-y-1' : ''}`}>{save.pets} pets</p>
                 <audio hidden id="audio" loop src="/click_the_erisly.mp3" />
+
+                <div className="fixed bottom-0 right-0 p-4 mr-4 bg-black bg-opacity-50 rounded-t-xl">
+                    <p className="font-bold cursor-pointer" onClick={() => setUpgradesOpen(!upgradesOpen)}>
+                        Upgrades
+                    </p>
+                    <div
+                        className={`transition-slide ${upgradesOpen ? 'max-h-16' : 'max-h-0'}`}
+                        style={{ clipPath: 'polygon(0% 0, 100% 0, 100% 100%, 0 100%)' }}
+                    >
+                        {upgrades.map((upgrade, i) => (
+                            <div className="flex items-center justify-center gap-2" key={i}>
+                                <p>[x{save.purchasedUpgrades[i]}]</p>
+                                <p>{upgrade.name}</p>
+                                <p>{upgrade.pets / upgrade.interval} pets/s</p>
+                                <Button
+                                    content={`Buy: ${upgrade.cost} pets`}
+                                    disabled={upgrade.cost > save.pets}
+                                    onClick={() => buyUpgrade(i)}
+                                    subClassName="py-1 px-2"
+                                />
+                            </div>
+                        ))}
+                    </div>
+                </div>
             </main>
 
-            <div className="absolute top-0 min-h-screen overflow-hidden pointer-events-none min-w-screen" style={{ transform: 'translateZ(0)' }}>
+            <div className="absolute top-0 w-full h-full overflow-hidden pointer-events-none" style={{ transform: 'translateZ(0)' }}>
                 <canvas className="opacity-30" id="canvas" style={{ transform: `scale(${musicIntensity})` }} />
             </div>
         </div>

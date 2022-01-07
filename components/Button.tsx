@@ -11,15 +11,17 @@ export default function Button(props: {
     };
     content?: string;
     contentClassName?: string;
+    disabled?: boolean;
     hoverToShowContent?: boolean;
     href?: string;
     icon?: IconifyIcon;
     iconSize?: number;
     icons?: IconifyIcon[];
     noExternal?: boolean;
+    onClick?: () => void;
     subClassName?: string;
 }): ReactElement {
-    const linkClassName = `group ${props.className}`;
+    const linkClassName = `group ${props.className || ''}`;
     const containerClassName = `flex items-center p-3 ${props.hoverToShowContent ? '' : 'space-x-3'} no-underline hover:button button rounded-3xl ${
         props.subClassName || ''
     }`;
@@ -32,7 +34,7 @@ export default function Button(props: {
     const icons = props.icons || (props.icon ? [props.icon as IconifyIcon] : []);
 
     return (
-        <Link button className={linkClassName} href={props.href} noExternal={props.noExternal}>
+        <Link button className={linkClassName} disabled={props.disabled} href={props.href} noExternal={props.noExternal} onClick={props.onClick}>
             <div className={containerClassName} style={containerStyle}>
                 {icons[0] ? <InlineIcon height={props.iconSize || 16} icon={icons[0]} width={props.iconSize || 16} /> : null}
                 <span className={contentClassName} style={contentStyle}>
