@@ -11,7 +11,7 @@ const Page: NextPage = () => {
         <div className="text-white bg-erisly-600">
             <Head showHomeButton={false} />
 
-            <main className="flex flex-col items-center justify-center flex-1 min-h-screen px-8 text-center">
+            <main className="flex flex-col items-center justify-center flex-1 min-h-screen p-8 text-center">
                 <div className="sm:mx-24 object-fit relative h-72 w-72 sm:h-96 sm:w-96 md:h-[530px] md:w-[500px]">
                     <Image alt="Erisly" className="rounded-md" layout="fill" quality="100" src={erisly} />
                 </div>
