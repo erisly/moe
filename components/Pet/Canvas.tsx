@@ -1,4 +1,4 @@
-import { forwardRef, ReactElement, Ref, useEffect, useImperativeHandle, useRef, useState } from 'react';
+import { forwardRef, ReactElement, useEffect, useImperativeHandle, useRef, useState } from 'react';
 
 import * as Constants from './Constants';
 
