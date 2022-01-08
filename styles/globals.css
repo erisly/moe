@@ -4,75 +4,82 @@
 
 /* Default font size is too small */
 body {
-    @apply text-lg;
+  @apply text-lg;
 }
 
 /* Going out on a limb and assuming everyone hates this feature */
-img { 
-    -webkit-user-drag: none; 
-    -khtml-user-drag: none; 
-    -moz-user-drag: none; 
-    -o-user-drag: none; 
-    user-drag: none; 
+img, .no-select {
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-drag: none;
+
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 /* Turn off the feature that makes stuff turn blue when tapped on mobile */
 .no-highlight {
-    -webkit-tap-highlight-color: transparent;
+  -webkit-tap-highlight-color: transparent;
 }
 
 /* Usually for a (anchor) elements */
 .link {
-    @apply underline;
+  @apply underline;
 }
 .link:hover {
-    @apply text-erisly-400;
+  @apply text-erisly-400;
 }
 
 .button {
-    @apply text-white bg-black;
+  @apply text-white bg-black;
 }
 .button:hover {
-    @apply text-black bg-white;
+  @apply text-black bg-white;
 }
 
 .hover\:button {
-    @apply duration-200;
+  @apply duration-200;
 }
 .hover\:button:hover {
-    @apply shadow-xl opacity-95;
+  @apply shadow-xl opacity-95;
 }
 
 .disabled {
-    pointer-events: none;
-    cursor: default;
-    opacity: 0.8;
+  pointer-events: none;
+  cursor: default;
+  opacity: 0.8;
 }
 
 .button-erisly {
-    @apply text-white bg-erisly-400;
+  @apply text-white bg-erisly-400;
 }
 .button-erisly:hover {
-    @apply bg-white text-erisly-400;
+  @apply bg-white text-erisly-400;
 }
 
 .button-github {
-    @apply text-white bg-github;
+  @apply text-white bg-github;
 }
 .button-github:hover {
-    @apply bg-white text-github;
+  @apply bg-white text-github;
 }
 
 .button-discord {
-    @apply text-white bg-discord;
+  @apply text-white bg-discord;
 }
 .button-discord:hover {
-    @apply bg-white text-discord;
+  @apply bg-white text-discord;
 }
 
 .button-discord-github {
-    @apply text-white bg-gradient-to-r from-discord to-github;
+  @apply text-white bg-gradient-to-r from-discord to-github;
 }
 .button-discord-github:hover {
-    @apply text-white;
+  @apply text-white;
 }

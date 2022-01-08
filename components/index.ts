@@ -5,3 +5,4 @@ export { default as HomeButton } from './HomeButton';
 export { default as Link } from './Link';
 export { default as Loading } from './Loading';
 export { default as Marquee } from './Marquee';
+export * as Pet from './Pet';

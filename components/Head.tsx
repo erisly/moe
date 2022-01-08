@@ -1,7 +1,8 @@
 import NextJSHead from 'next/head';
 import React, { ReactElement } from 'react';
 
-import { Constants, HomeButton } from '.';
+import * as Constants from './Constants';
+import HomeButton from './HomeButton';
 
 export default function Head(props: {
     color?: string;
