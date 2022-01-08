@@ -164,7 +164,8 @@ const Page: NextPage = () => {
 
             effects.forEach((effect, i) => {
                 if (effect.x == -1) effect.x = random(0, window.innerWidth - EFFECT_WIDTH);
-                ctx.drawImage(emoteImages[emotes.indexOf(effect.emote)], effect.x, window.innerHeight - effect.y);
+                const emoteImage = emoteImages[emotes.indexOf(effect.emote)];
+                if (emoteImage) ctx.drawImage(emoteImage, effect.x, window.innerHeight - effect.y);
                 effect.y = effect.y + 1;
                 if (effect.y - EFFECT_WIDTH >= window.innerHeight) effects.splice(i, 1);
             });
