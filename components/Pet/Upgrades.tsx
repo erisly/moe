@@ -9,6 +9,8 @@ interface Upgrade {
     pets: number;
 }
 
+// TODO: upgrade enum
+
 // the maximum interval value in the upgrades list below
 // could calculate dynamically but lazy
 export const maxUpgradeInterval = 5;
@@ -16,10 +18,20 @@ export const upgrades: Upgrade[] = [
     {
         cost: 20,
         interval: 5,
-        name: 'Employees',
+        name: 'Employee',
         pets: 1,
     },
 ];
+
+export function calculateUpgradeCost(i: number, purchasedUpgrades: number[]): number {
+    let cost = upgrades[i].cost;
+    let current = 1;
+    while (current <= purchasedUpgrades[i]) {
+        cost += current * (upgrades[i].pets / upgrades[i].interval);
+        current++;
+    }
+    return Math.ceil(cost);
+}
 
 export function UpgradesMenu(props: { onBuyUpgrade: (i: number) => void; pets: number; purchasedUpgrades: number[] }): ReactElement {
     const [upgradesOpen, setUpgradesOpen] = useState(false);
@@ -39,8 +51,8 @@ export function UpgradesMenu(props: { onBuyUpgrade: (i: number) => void; pets: n
                         <p>{upgrade.name}</p>
                         <p>{upgrade.pets / upgrade.interval} pets/s</p>
                         <Button
-                            content={`Buy: ${upgrade.cost} pets`}
-                            disabled={upgrade.cost > props.pets}
+                            content={`Buy: ${calculateUpgradeCost(i, props.purchasedUpgrades)} pets`}
+                            disabled={calculateUpgradeCost(i, props.purchasedUpgrades) > props.pets}
                             onClick={() => props.onBuyUpgrade(i)}
                             subClassName="py-1 px-2"
                         />

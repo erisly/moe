@@ -1,10 +1,11 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { CSSProperties, useEffect, useRef, useState } from 'react';
 
 interface Props {
     content: string;
     className?: string;
     onComplete?: () => void;
     speed?: number;
+    style?: CSSProperties;
 }
 
 const Marquee = (props: Props): React.ReactElement => {
@@ -16,7 +17,7 @@ const Marquee = (props: Props): React.ReactElement => {
     }, [setSpeed, props]);
 
     return (
-        <div className={props.className} ref={marqueeRef}>
+        <div className={props.className} ref={marqueeRef} style={props.style}>
             <Content data={{ ...props, speed }} />
         </div>
     );

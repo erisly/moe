@@ -3,20 +3,13 @@
 
 import type { NextPage } from 'next';
 import Image from 'next/image';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { Head, Marquee, Pet } from '../components';
 
-interface SaveData {
-    pets: number;
-    purchasedUpgrades: number[];
-    totalPets: number;
-    version: typeof Pet.Constants.SAVE_VERSION;
-}
-
 const Page: NextPage = () => {
     // pet counter
-    const [save, setSave] = useState<SaveData>({
+    const [save, setSave] = useState<Pet.SaveData>({
         pets: 0,
         // eslint-disable-next-line @typescript-eslint/no-array-constructor
         purchasedUpgrades: new Array(Pet.upgrades.length).fill(0),
@@ -28,13 +21,13 @@ const Page: NextPage = () => {
     // the background effects as they scroll by
     const [effects] = useState<Pet.Effect[]>([]);
     const [initialized, setInitialized] = useState(false);
-    const [marqueeQueue] = useState<string[]>([]);
+    const [marqueeQueue, setMarqueeQueue] = useState<string[]>([]);
     const canvasRef = useRef<Pet.CanvasRef>(null);
 
     function startPet() {
         if (src == Pet.Constants.IMG_PET) return;
 
-        setSave((save) => ({ ...save, pets: save.pets + 1, totalPets: save.totalPets + 1 }));
+        addPets(1);
         setSrc(Pet.Constants.IMG_PET);
         const emote = Pet.Constants.EFFECT_EMOTES[random(0, Pet.Constants.EFFECT_EMOTES.length - 1)];
         effects.push({ emote, x: -1, y: 0 });
@@ -46,20 +39,32 @@ const Page: NextPage = () => {
         setSrc(Pet.Constants.IMG_UNPET);
     }
 
+    const addToMarquee = useCallback(
+        (line: Pet.Line) => {
+            setMarqueeQueue([...marqueeQueue, line.line]);
+        },
+        [marqueeQueue]
+    );
+
+    const addPets = useCallback(
+        (amount: number) => {
+            setSave((save) => {
+                Pet.Lines.checkAddPets(save, amount).forEach(addToMarquee);
+                return { ...save, pets: save.pets + amount, totalPets: save.totalPets + amount };
+            });
+        },
+        [addToMarquee]
+    );
+
     function buyUpgrade(i: number) {
-        if (Pet.upgrades[i].cost > save.pets) return;
+        if (Pet.calculateUpgradeCost(i, save.purchasedUpgrades) > save.pets) return;
         setSave((save) => ({
             ...save,
-            pets: save.pets - Pet.upgrades[i].cost,
+            pets: save.pets - Pet.calculateUpgradeCost(i, save.purchasedUpgrades),
             purchasedUpgrades: save.purchasedUpgrades.fill(save.purchasedUpgrades[i] + 1, i, i + 1),
         }));
 
-        Pet.lines.forEach((line) => {
-            if ((line.requirements.employees || 0) == save.purchasedUpgrades[0]) {
-                Pet.lines.splice(0, 1);
-                marqueeQueue.push(line.line);
-            }
-        });
+        Pet.Lines.checkBuyUpgrade(save).forEach(addToMarquee);
     }
 
     function random(min: number, max: number) {
@@ -73,7 +78,7 @@ const Page: NextPage = () => {
 
         if (typeof localStorage != 'undefined' && localStorage.getItem(Pet.Constants.SAVE_ID) != null) {
             try {
-                const parsedSave = JSON.parse(localStorage.getItem(Pet.Constants.SAVE_ID) as string) as SaveData;
+                const parsedSave = JSON.parse(localStorage.getItem(Pet.Constants.SAVE_ID) as string) as Pet.SaveData;
                 if (parsedSave.version == Pet.Constants.SAVE_VERSION) setSave(parsedSave);
                 else alert('Your save data is out of date. Resetting your progress...');
             } catch (e) {
@@ -94,7 +99,8 @@ const Page: NextPage = () => {
                 });
 
                 localStorage.setItem(Pet.Constants.SAVE_ID, JSON.stringify(save));
-                return { ...save, pets: save.pets + newPets, totalPets: save.totalPets + newPets };
+                addPets(newPets);
+                return save;
             });
 
             interval++;
@@ -102,17 +108,17 @@ const Page: NextPage = () => {
         }
 
         setInterval(intervalRunner, 1000);
-    }, [effects, initialized]);
+    }, [effects, initialized, addPets]);
 
     return (
         <div className="text-white bg-erisly-600" onMouseUp={endPet}>
             <Head description="do it u wont" image="erisly/emotes/pet.png" title="Pet the Erisly" />
 
             <main className="flex relative z-10 flex-col flex-1 justify-center items-center px-8 min-h-screen text-center">
-                {marqueeQueue.length > 0 ? (
+                {marqueeQueue[0] ? (
                     <Marquee
-                        className="overflow-hidden fixed top-0 py-4 min-w-full text-xl bg-black bg-opacity-40"
-                        content={marqueeQueue[0]}
+                        className="overflow-hidden fixed top-0 py-4 min-w-full text-xl bg-black bg-opacity-40 animate-marquee-in"
+                        content={marqueeQueue.join('          ')}
                         onComplete={() => marqueeQueue.splice(0, 1)}
                     />
                 ) : (

@@ -7,6 +7,7 @@ const config = {
             animation: {
                 'marquee-1': 'marquee-1 3s linear 1',
                 'marquee-2': 'marquee-2 3s linear 1',
+                'marquee-in': 'marquee-in 1s ease-in-out 1',
             },
             keyframes: {
                 'marquee-1': {
@@ -16,6 +17,10 @@ const config = {
                 'marquee-2': {
                     '0%': { right: '0' },
                     '100%': { right: '100%' },
+                },
+                'marquee-in': {
+                    '0%': { top: '-60px' },
+                    '100%': { top: '0px' },
                 },
             },
             transitionProperty: {
