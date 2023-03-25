@@ -11,6 +11,12 @@ module.exports = {
             rules: {},
         },
         {
+            // Define the configuration for `<script>` tag.
+            // Script in `<script>` is assigned a virtual file name with the `.js` extension.
+            files: ['**/*.astro/*.js', '*.astro/*.js'],
+            parser: '@typescript-eslint/parser',
+        },
+        {
             files: ['*.mjs'],
             parserOptions: {
                 sourceType: 'module',
