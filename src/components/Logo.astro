@@ -1,0 +1,16 @@
+---
+interface Props {
+    className?: string;
+}
+
+const { className } = Astro.props;
+---
+
+<a href="/">
+    <p class={`logo ${className}`}>erisly.moe</p>
+</a>
+<style>
+    .logo {
+        @apply leading-normal font-bold text-transparent bg-gradient-to-bl from-erisly-primary via-erisly-secondary to-erisly-primary bg-clip-text bg-[length:400%_400%] bg-[0%] hover:bg-[100%] transition-[background] duration-1000;
+    }
+</style>

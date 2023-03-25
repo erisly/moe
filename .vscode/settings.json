@@ -1,0 +1,7 @@
+{
+    "eslint.validate": [
+      "astro",
+      "typescript",
+    ],
+    "headwind.runOnSave": true
+  }

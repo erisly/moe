@@ -1,0 +1,19 @@
+---
+import { Icon } from 'astro-icon';
+const styles = {
+    primary: 'text-black bg-white hover:bg-gray-200',
+    none: '',
+};
+type Style = keyof typeof styles;
+
+interface Props {
+    icon?: string;
+    style?: Style;
+}
+const { style = 'primary', icon } = Astro.props;
+---
+
+<div class={`font-bold rounded-lg px-4 py-2 flex gap-2 transition-colors shadow-md duration-200 ${styles[style]}`}>
+    {icon ? <Icon name={icon} width="24" /> : undefined}
+    <slot />
+</div>
