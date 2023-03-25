@@ -33,3 +33,31 @@ const { title = 'erisly.moe', description = Description, imagePath = 'emotes/pat
         <slot />
     </body>
 </html>
+
+<style is:global>
+    /* Assuming everyone hates being able to drag images */
+    img,
+    .no-select {
+        -webkit-user-drag: none;
+        -khtml-user-drag: none;
+        -moz-user-drag: none;
+        -o-user-drag: none;
+        user-drag: none;
+
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    /* Disable the feature that makes stuff turn blue when tapped on mobile */
+    .no-highlight {
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    ::selection {
+        background: #eb004a;
+    }
+</style>
