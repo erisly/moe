@@ -1,15 +1,19 @@
 ---
 import { Layout } from '../layouts';
-import { Button, Logo } from '../components';
+import { Button, Logo, Patter } from '../components';
 import { Description } from '../utils';
 ---
 
 <Layout title="erisly.moe">
     <main class="h-screen w-screen flex items-center justify-center">
         <section class="flex flex-col items-center justify-center container gap-4 text-white text-center p-4">
-            <img src="/emotes/pat.png" alt="Erisly being pet on the head" class="rounded-lg" />
-            <Logo className="text-6xl" />
-            <p>{Description}</p>
+            <Patter className="rounded-lg" />
+
+            <div class="flex flex-col">
+                <Logo className="text-6xl" />
+                <p>{Description}</p>
+            </div>
+
             <a href="https://github.com/erisly/moe" target="_blank">
                 <Button icon="akar-icons:github-fill">Contribute on GitHub</Button>
             </a>

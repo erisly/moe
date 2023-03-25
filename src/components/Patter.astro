@@ -1,0 +1,23 @@
+---
+interface Props {
+    className?: string;
+}
+
+const { className } = Astro.props;
+---
+
+<img id="patter" alt="Erisly being pet on the head" src="/emotes/pat.png" class={className} />
+
+<script>
+    const urlCreator = window.URL || window.webkitURL;
+    const patImage = urlCreator.createObjectURL(await(await fetch('/emotes/pat.png')).blob());
+    const unpatImage = urlCreator.createObjectURL(await(await fetch('/emotes/unpat.png')).blob());
+
+    const patter = document.getElementById('patter') as HTMLImageElement | null;
+    if (patter) {
+        patter.src = unpatImage;
+        patter.style.cursor = 'pointer';
+        patter.addEventListener('mousedown', () => (patter.src = patImage));
+        patter.addEventListener('mouseup', () => (patter.src = unpatImage));
+    }
+</script>
